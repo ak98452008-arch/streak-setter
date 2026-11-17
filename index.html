@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101522">
+<meta name="description" content="Streak Setter — build consistency one day at a time.">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Streak Setter</title>
+<style>
+:root{--bg:#0d1220;--panel:#151d2e;--panel2:#1b263a;--line:#29364d;--text:#f4f7ff;--muted:#9ba9bf;--a:#8b7cff;--b:#35d6b0;--gold:#ffc96b;--red:#ff7892;--radius:22px}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 15% -10%,#27254e 0,transparent 38%),radial-gradient(ellipse at 100% 20%,#123d46 0,transparent 32%),var(--bg);color:var(--text);font:15px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+button,input{font:inherit}button{cursor:pointer;border:0;color:inherit}.app{max-width:1180px;margin:auto;padding:26px 22px 50px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:28px}.brand{display:flex;align-items:center;gap:12px}.logo{width:44px;height:44px;border-radius:15px;background:linear-gradient(135deg,var(--a),#43d9c2);display:grid;place-items:center;font-size:22px;box-shadow:0 8px 30px #7164ff55}.brand h1{font-size:19px;letter-spacing:-.5px;margin:0}.brand small{color:var(--muted);display:block;font-size:12px;margin-top:1px}.creator{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px}.avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#29344b;color:#c8c3ff;font-weight:800}
+.welcome{display:flex;justify-content:space-between;align-items:end;margin:8px 0 22px;gap:12px}.eyebrow{color:#a99fff;text-transform:uppercase;letter-spacing:1.6px;font-size:11px;font-weight:800}.welcome h2{font-size:clamp(26px,4vw,36px);letter-spacing:-1.2px;margin:5px 0 4px}.welcome p{color:var(--muted);margin:0}.date{color:var(--muted);font-size:13px;text-align:right}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}.stat,.card{background:linear-gradient(145deg,#192338ed,#121a2aee);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 14px 38px #0002}.stat{padding:18px;min-height:112px}.stat .label{font-size:12px;color:var(--muted)}.stat strong{display:block;font-size:29px;letter-spacing:-1px;margin-top:7px}.stat .sub{font-size:11px;color:#7f90aa;margin-top:2px}.stat .ico{float:right;font-size:18px}
+.layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,.85fr);gap:16px}.card{padding:20px}.card-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:15px}.card h3{font-size:16px;margin:0;letter-spacing:-.3px}.muted{color:var(--muted)}.tiny{font-size:12px}.primary{background:linear-gradient(110deg,#8877ff,#5b9cff);border-radius:13px;padding:11px 15px;font-weight:750;box-shadow:0 8px 22px #7164ff38}.secondary{background:#26324a;border:1px solid #35445f;border-radius:12px;padding:9px 12px;color:#dce5f7}.habits{display:grid;gap:10px}.habit{display:flex;align-items:center;gap:13px;padding:13px;background:#1b2639;border:1px solid #2b3850;border-radius:16px;transition:.2s}.habit.done{border-color:#2b8c7a;background:#17312f}.habit-icon{width:43px;height:43px;border-radius:14px;background:#303050;display:grid;place-items:center;font-size:21px;flex-shrink:0}.habit-info{min-width:0;flex:1}.habit-info b{display:block;font-size:14px}.habit-info small{color:var(--muted);font-size:11px}.habit-streak{color:var(--gold);font-size:12px;white-space:nowrap}.check{width:36px;height:36px;border-radius:12px;background:#2b3850;border:1px solid #40506b;font-size:17px}.done .check{background:#2cbd9b;color:#071b18;border:0}.empty{padding:28px 12px;text-align:center;color:var(--muted);border:1px dashed #3a4862;border-radius:16px}.side{display:grid;gap:16px;align-content:start}.progress-ring{width:116px;height:116px;border-radius:50%;margin:12px auto;display:grid;place-items:center;background:conic-gradient(var(--b) var(--progress,0%),#2b3850 0);position:relative}.progress-ring:before{content:"";position:absolute;inset:9px;background:#151e30;border-radius:50%}.progress-ring strong{z-index:1;font-size:25px}.center{text-align:center}.quote{background:linear-gradient(135deg,#292650,#1a3542);border:1px solid #44446e;border-radius:18px;padding:18px}.quote p{font-size:15px;margin:8px 0 0}.quote small{color:#b8b4ff}.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center}.calendar-grid span{font-size:11px;color:var(--muted);padding:5px 0}.day{padding:7px 0;border-radius:9px;font-size:12px;background:#1d2940;color:#dce5f7}.day.today{outline:1px solid var(--a)}.day.active{background:#226a5d;color:#d7fff5}.day.blank{background:transparent}.feedback{display:flex;align-items:center;justify-content:space-between;gap:12px}.feedback a{color:#fff;text-decoration:none;background:#168bca;padding:10px 13px;border-radius:12px;font-weight:700;font-size:12px;white-space:nowrap}
+.modal-back{position:fixed;inset:0;background:#050914c9;display:none;place-items:center;padding:18px;z-index:5}.modal-back.show{display:grid}.modal{width:min(440px,100%);background:#172238;border:1px solid #3a4965;border-radius:22px;padding:22px;box-shadow:0 25px 80px #0009}.modal h3{margin:0 0 16px}.field{display:grid;gap:6px;margin:12px 0}.field label{font-size:12px;color:#b4c0d4}.field input{width:100%;background:#0f1728;color:white;border:1px solid #3a4965;border-radius:11px;padding:12px;outline:none}.field input:focus{border-color:var(--a)}.modal-actions{display:flex;gap:9px;justify-content:flex-end;margin-top:18px}.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#e9fff8;color:#102c26;padding:11px 16px;border-radius:13px;font-weight:700;box-shadow:0 10px 35px #0005;transition:.25s;z-index:9}.toast.show{opacity:1;transform:translate(-50%,0)}
+footer{text-align:center;color:#72819b;font-size:11px;margin-top:24px}footer b{color:#a99fff}
+@media(max-width:850px){.stats{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}.side{grid-template-columns:repeat(2,minmax(0,1fr))}.side .quote,.side .feedback{grid-column:span 2}}
+@media(max-width:520px){.app{padding:18px 13px 34px}.creator span{display:none}.welcome{align-items:start}.date{max-width:100px}.stats{gap:9px}.stat{padding:14px;min-height:100px}.stat strong{font-size:25px}.card{padding:16px}.side{grid-template-columns:1fr}.side .quote,.side .feedback{grid-column:auto}.habit{gap:9px;padding:10px}.habit-streak{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+ <div class="brand"><div class="logo">✦</div><div><h1>Streak Setter</h1><small>Small steps. Strong streaks.</small></div></div>
+ <div class="creator"><div class="avatar">AK</div><span>Created by <b style="color:#d7d2ff">@Ayush9845</b></span></div>
+</header>
+<section class="welcome"><div><div class="eyebrow">YOUR CONSISTENCY SPACE</div><h2>Make today count.</h2><p>Every completed day is a promise kept to yourself.</p></div><div class="date" id="todayLabel"></div></section>
+<section class="stats">
+ <div class="stat"><span class="ico">🔥</span><div class="label">Best current streak</div><strong id="bestStreak">0</strong><div class="sub">days in a row</div></div>
+ <div class="stat"><span class="ico">✓</span><div class="label">Completed today</div><strong id="completedCount">0/0</strong><div class="sub">habits checked off</div></div>
+ <div class="stat"><span class="ico">🎯</span><div class="label">Total check-ins</div><strong id="totalChecks">0</strong><div class="sub">all-time progress</div></div>
+ <div class="stat"><span class="ico">🌱</span><div class="label">Active habits</div><strong id="habitCount">0</strong><div class="sub">habits you're building</div></div>
+</section>
+<div class="layout">
+ <main class="card">
+  <div class="card-head"><div><h3>Today's habits</h3><div class="muted tiny" id="habitDate">Your daily wins</div></div><button class="primary" id="addBtn">＋ Add habit</button></div>
+  <div class="habits" id="habitList"></div>
+ </main>
+ <aside class="side">
+  <section class="card center"><div class="card-head"><h3>Daily progress</h3><span class="muted tiny">TODAY</span></div><div class="progress-ring" id="progressRing"><strong id="progressPct">0%</strong></div><div class="muted tiny" id="progressCaption">Start with one small win.</div></section>
+  <section class="card"><div class="card-head"><h3>This month</h3><span class="muted tiny" id="monthLabel"></span></div><div class="calendar-grid" id="calendar"></div></section>
+  <section class="quote"><small>✧ A LITTLE REMINDER</small><p>“Consistency is built one ordinary day at a time.”</p></section>
+  <section class="card feedback"><div><b style="font-size:13px">Have an idea?</b><div class="muted tiny">Send feedback to the creator.</div></div><a href="https://t.me/Ayush9845" target="_blank" rel="noopener">✈ Send Feedback</a></section>
+ </aside>
+</div>
+<footer>Made with focus <b>✦</b> by @Ayush9845 · Your data stays on this device</footer>
+</div>
+<div class="modal-back" id="modalBack"><div class="modal"><h3 id="modalTitle">Add a habit</h3><form id="habitForm"><div class="field"><label for="habitName">Habit name</label><input id="habitName" maxlength="40" placeholder="e.g. Read 10 pages" required></div><div class="field"><label for="habitIcon">Emoji (optional)</label><input id="habitIcon" maxlength="4" placeholder="📚"></div><div class="modal-actions"><button type="button" class="secondary" id="cancelBtn">Cancel</button><button class="primary" type="submit">Save habit</button></div></form></div></div>
+<div class="toast" id="toast"></div>
+<script>
+const KEY='streak-setter-v1';
+const today=()=>new Date().toLocaleDateString('en-CA');
+const dateLabel=new Date().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+let data=JSON.parse(localStorage.getItem(KEY)||'null')||{habits:[]};
+let editing=null;
+const $=id=>document.getElementById(id);
+function save(){localStorage.setItem(KEY,JSON.stringify(data));render()}
+function streak(h){let n=0,d=new Date();const done=new Set(h.logs||[]);let key=d.toLocaleDateString('en-CA');if(!done.has(key)){d.setDate(d.getDate()-1);key=d.toLocaleDateString('en-CA')}while(done.has(key)){n++;d.setDate(d.getDate()-1);key=d.toLocaleDateString('en-CA')}return n}
+function render(){
+ const t=today();$('todayLabel').textContent=dateLabel;$('habitDate').textContent=new Date().toLocaleDateString(undefined,{month:'long',day:'numeric'});
+ const done=data.habits.filter(h=>(h.logs||[]).includes(t)).length,total=data.habits.length,pct=total?Math.round(done/total*100):0;
+ $('completedCount').textContent=done+'/'+total;$('habitCount').textContent=total;$('totalChecks').textContent=data.habits.reduce((s,h)=>s+(h.logs||[]).length,0);
+ $('bestStreak').textContent=data.habits.reduce((m,h)=>Math.max(m,streak(h)),0);
+ $('progressPct').textContent=pct+'%';$('progressRing').style.setProperty('--progress',pct+'%');$('progressCaption').textContent=total?(pct===100?'Amazing! All habits completed.':done+' of '+total+' habits completed'):'Add a habit to begin your journey.';
+ const list=$('habitList');list.innerHTML='';
+ if(!total){list.innerHTML='<div class="empty"><div style="font-size:30px;margin-bottom:8px">🌿</div><b>No habits yet</b><div class="tiny" style="margin-top:5px">Add your first habit and start building a streak.</div></div>'}
+ data.habits.forEach(h=>{const isDone=(h.logs||[]).includes(t),el=document.createElement('div');el.className='habit'+(isDone?' done':'');
+ const info=document.createElement('div');info.className='habit-info';const name=document.createElement('b');name.textContent=h.name;const sub=document.createElement('small');sub.textContent=isDone?'Completed today · Great work!':'Tap the check when you finish';info.append(name,sub);
+ const icon=document.createElement('div');icon.className='habit-icon';icon.textContent=h.icon||'✦';
+ const st=document.createElement('div');st.className='habit-streak';st.textContent='🔥 '+streak(h);
+ const check=document.createElement('button');check.className='check';check.setAttribute('aria-label',isDone?'Undo completion':'Mark complete');check.textContent=isDone?'✓':'○';check.onclick=()=>toggle(h.id);
+ const edit=document.createElement('button');edit.className='secondary';edit.style.padding='8px';edit.textContent='⋯';edit.setAttribute('aria-label','Edit habit');edit.onclick=()=>openModal(h.id);
+ el.append(icon,info,st,check,edit);list.append(el)});
+ renderCalendar();
+}
+function toggle(id){const h=data.habits.find(x=>x.id===id),t=today();h.logs=h.logs||[];if(h.logs.includes(t)){h.logs=h.logs.filter(x=>x!==t);toast('Check-in removed')}else{h.logs.push(t);toast('Nice work — streak updated! ✨')}save()}
+function openModal(id=null){editing=id;const h=data.habits.find(x=>x.id===id);$('modalTitle').textContent=h?'Edit habit':'Add a habit';$('habitName').value=h?.name||'';$('habitIcon').value=h?.icon||'';$('modalBack').classList.add('show');setTimeout(()=>$('habitName').focus(),50)}
+function closeModal(){$('modalBack').classList.remove('show')}
+$('addBtn').onclick=()=>openModal();$('cancelBtn').onclick=closeModal;
+$('modalBack').onclick=e=>{if(e.target===$('modalBack'))closeModal()};
+$('habitForm').onsubmit=e=>{e.preventDefault();const name=$('habitName').value.trim();if(!name)return;const icon=$('habitIcon').value.trim()||'✦';if(editing){const h=data.habits.find(x=>x.id===editing);h.name=name;h.icon=icon}else data.habits.push({id:Date.now().toString(),name,icon,logs:[]});closeModal();save();toast(editing?'Habit updated':'Habit added')};
+function renderCalendar(){const now=new Date(),y=now.getFullYear(),m=now.getMonth(),first=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate();$('monthLabel').textContent=now.toLocaleDateString(undefined,{month:'short',year:'numeric'});const c=$('calendar');c.innerHTML='';['S','M','T','W','T','F','S'].forEach(x=>{const e=document.createElement('span');e.textContent=x;c.append(e)});for(let i=0;i<first;i++){const e=document.createElement('div');e.className='day blank';c.append(e)}for(let d=1;d<=days;d++){const dt=new Date(y,m,d).toLocaleDateString('en-CA'),e=document.createElement('div');e.className='day'+(dt===today()?' today':'');if(data.habits.some(h=>(h.logs||[]).includes(dt)))e.classList.add('active');e.textContent=d;c.append(e)}}
+let toastTimer;function toast(msg){const el=$('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2200)}
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+render();
+</script>
+</body>
+</html>
